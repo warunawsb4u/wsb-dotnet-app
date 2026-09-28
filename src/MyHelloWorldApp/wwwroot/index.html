@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura & Ember | Gourmet Dining & Craft Cocktail Lounge</title>
+  <meta name="description" content="Experience world-class culinary artistry, artisan craft cocktails, and wood-fired gastronomy at Aura & Ember." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-primary: #0b0d13;
+      --bg-surface: #131722;
+      --bg-card: rgba(24, 28, 42, 0.7);
+      --border-subtle: rgba(212, 175, 55, 0.15);
+      --border-glow: rgba(212, 175, 55, 0.4);
+      --gold-primary: #e6b85c;
+      --gold-light: #f7d58b;
+      --amber-accent: #ff7a18;
+      --text-main: #f0f2f7;
+      --text-muted: #9ba1b0;
+      --text-dark: #0b0d13;
+      --gradient-gold: linear-gradient(135deg, #e6b85c 0%, #ff9a3d 100%);
+      --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      --shadow-elevation: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      selection-background-color: var(--gold-primary);
+      selection-color: var(--text-dark);
+    }
+
+    h1, h2, h3, .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Ambient Glow Backgrounds */
+    .glow-sphere-1 {
+      position: absolute;
+      top: -100px;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(230, 184, 92, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-sphere-2 {
+      position: absolute;
+      top: 600px;
+      right: 5%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 122, 24, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 13, 19, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--gradient-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(230, 184, 92, 0.3);
+    }
+
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.65rem 1.35rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-gold {
+      background: var(--gradient-gold);
+      color: var(--text-dark);
+      box-shadow: 0 4px 15px rgba(230, 184, 92, 0.25);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(230, 184, 92, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+      background: rgba(230, 184, 92, 0.05);
+    }
+
+    .cart-btn {
+      position: relative;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .cart-btn:hover {
+      border-color: var(--gold-primary);
+    }
+
+    .cart-badge {
+      background: var(--amber-accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 6rem 1.5rem 4rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(230, 184, 92, 0.1);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 1.15;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 40%, #c4cbd9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero h1 span {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stats-strip {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-lbl {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.2rem;
+    }
+
+    /* Menu Section */
+    .menu-section {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: #fff;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      color: #fff;
+      border-color: var(--border-glow);
+    }
+
+    .filter-btn.active {
+      background: var(--gradient-gold);
+      color: var(--text-dark);
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(230, 184, 92, 0.25);
+    }
+
+    /* Menu Cards Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-glow);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(230, 184, 92, 0.15);
+    }
+
+    .card-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .menu-card:hover .card-img {
+      transform: scale(1.08);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(11, 13, 19, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-cal {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      color: #cbd5e1;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-rating {
+      color: var(--gold-primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .card-reviews {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-price {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .add-to-cart-btn {
+      background: rgba(230, 184, 92, 0.12);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-primary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .add-to-cart-btn:hover {
+      background: var(--gradient-gold);
+      color: var(--text-dark);
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+
+    /* Chef Spotlight Banner */
+    .spotlight-banner {
+      max-width: 1200px;
+      margin: 5rem auto;
+      padding: 3rem 2.5rem;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 122, 24, 0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 90% 80%, rgba(230, 184, 92, 0.15) 0%, transparent 60%),
+                  var(--bg-surface);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .spotlight-content {
+      max-width: 600px;
+    }
+
+    .spotlight-tag {
+      color: var(--amber-accent);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .spotlight-content h3 {
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .spotlight-content p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cart Drawer / Slide-over */
+    .cart-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cart-drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(420px, 100vw);
+      height: 100%;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-subtle);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      color: #fff;
+      font-size: 1.25rem;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .close-btn:hover {
+      color: #fff;
+    }
+
+    .drawer-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cart-item-img {
+      width: 55px;
+      height: 55px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #fff;
+    }
+
+    .cart-item-price {
+      color: var(--gold-primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .cart-qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .qty-btn:hover {
+      border-color: var(--gold-primary);
+    }
+
+    .drawer-footer {
+      padding: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11, 13, 19, 0.6);
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    /* Modal for Reservation */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 250;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-md);
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+    }
+
+    .modal-box h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px rgba(230, 184, 92, 0.2);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--gold-primary);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: #08090d;
+      padding: 4rem 1.5rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-col a:hover {
+      color: var(--gold-primary);
+    }
+
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.78rem;
+      color: #38bdf8;
+      margin-top: 1rem;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="glow-sphere-1"></div>
+  <div class="glow-sphere-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <div class="brand-logo">🔥</div>
+        <div>
+          <span class="brand-name">Aura & Ember</span>
+          <span class="brand-tag">Culinary & Cocktails</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#menu" class="active">Menu</a></li>
+        <li><a href="#specials">Chef's Table</a></li>
+        <li><a href="#story">Our Craft</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="cart-btn" id="openCartBtn" aria-label="Open Cart">
+          🛒 <span id="cartCount" class="cart-badge">0</span>
+        </button>
+        <button class="btn btn-gold" id="openReserveBtn">Reserve Table</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="badge-pill">
+      ✨ Michelin Guide Selected • 2026 Season
+    </div>
+    <h1>Where Culinary Artistry Meets <span>Liquid Alchemy</span></h1>
+    <p>
+      An extraordinary journey through artisan plates, smoky small-batch spirits, and tableside wood-fired gastronomy, crafted by Chef Antoine Laurent.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-gold">Explore Menu</a>
+      <button class="btn btn-outline" id="heroReserveBtn">Book a Table</button>
+    </div>
+
+    <div class="stats-strip">
+      <div class="stat-item">
+        <div class="stat-val">4.9 ★</div>
+        <div class="stat-lbl">1,400+ Reviews</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">38+</div>
+        <div class="stat-lbl">Craft Spirits</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">Farm-to-Fork</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu-section" id="menu">
+    <div class="section-header">
+      <span class="section-tag">Curated Gastronomy</span>
+      <h2>Artisan Culinary & Beverage Collection</h2>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">✨ All Offerings</button>
+      <button class="filter-btn" data-category="starters">🥗 Starters</button>
+      <button class="filter-btn" data-category="mains">🥩 Gourmet Mains</button>
+      <button class="filter-btn" data-category="beverages">🍸 Craft Cocktails & Drinks</button>
+      <button class="filter-btn" data-category="desserts">🍰 Sweet Finishes</button>
+    </div>
+
+    <!-- Card Grid Container -->
+    <div class="menu-grid" id="menuGrid">
+      <!-- Loaded dynamically via /api/menu -->
+    </div>
+  </section>
+
+  <!-- Chef Spotlight Banner -->
+  <section class="spotlight-banner" id="specials">
+    <div class="spotlight-content">
+      <span class="spotlight-tag">Mixologist Showcase</span>
+      <h3>Smoked Rosemary Old Fashioned</h3>
+      <p>
+        Experience our world-renowned signature cocktail: Small-batch Kentucky bourbon, charred garden rosemary smoke, hand-cut diamond ice, and flamed Seville orange peel prepared tableside.
+      </p>
+      <button class="btn btn-gold" onclick="addToCart({id: 2, name: 'Smoked Rosemary Old Fashioned', price: 18.00, image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=400&q=80'})">
+        Order Cocktail — $18.00
+      </button>
+    </div>
+    <div style="flex-shrink: 0;">
+      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=500&q=80"
+           alt="Smoked Cocktail"
+           style="width: 320px; height: 260px; object-fit: cover; border-radius: var(--radius-md); box-shadow: var(--shadow-elevation);" />
+    </div>
+  </section>
+
+  <!-- Cart Slide-Over Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Your Culinary Order</h3>
+      <button class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+    <div class="drawer-items" id="cartItemsContainer">
+      <!-- Cart items injected here -->
+      <p style="color: var(--text-muted); text-align: center; margin-top: 3rem;">Your tray is currently empty.</p>
+    </div>
+    <div class="drawer-footer">
+      <div class="total-row">
+        <span>Total:</span>
+        <span id="cartTotalPrice" style="color: var(--gold-primary);">$0.00</span>
+      </div>
+      <button class="btn btn-gold" style="width: 100%; justify-content: center;" id="checkoutBtn">
+        Proceed to Checkout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Reservation Modal -->
+  <div class="modal-overlay" id="reserveModal">
+    <div class="modal-box">
+      <button class="close-btn" id="closeReserveBtn" style="position: absolute; top: 1.5rem; right: 1.5rem;">&times;</button>
+      <h3>Reserve an Experience</h3>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
+        Join us for lunch, dinner, or evening cocktail tastings.
+      </p>
+
+      <form id="reserveForm">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" required placeholder="e.g. Waruna Silva" id="resName" />
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" required id="resDate" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time</label>
+            <select class="form-control" required id="resTime">
+              <option value="18:00">06:00 PM</option>
+              <option value="19:30" selected>07:30 PM</option>
+              <option value="21:00">09:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Number of Guests</label>
+          <select class="form-control" id="resGuests">
+            <option value="2">2 Guests (Intimate Table)</option>
+            <option value="4" selected>4 Guests (Dining Booth)</option>
+            <option value="6">6+ Guests (Chef's Table)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; margin-top: 1rem;">
+          Confirm Reservation
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toastIcon">✨</span>
+    <span id="toastMsg">Item added to your order!</span>
+  </div>
+
+  <!-- Footer -->
+  <footer id="story">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4 style="color: var(--gold-primary);">Aura & Ember</h4>
+        <p style="margin-bottom: 1rem;">
+          Artisanal culinary kitchen and craft mixology lounge combining wood-fired cooking with modernist spirits.
+        </p>
+        <div class="tech-badge">
+          ☁️ Powered by .NET 8 on Azure App Service
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hours of Operation</h4>
+        <ul>
+          <li>Tuesday – Friday: 12:00 PM – 11:00 PM</li>
+          <li>Saturday – Sunday: 10:30 AM – 12:00 AM</li>
+          <li>Monday: Closed for Masterclass</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Location & Contact</h4>
+        <ul>
+          <li>📍 45 Grand Promenade, Manhattan</li>
+          <li>📞 +1 (212) 555-0199</li>
+          <li>✉️ concierge@auraember.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Aura & Ember. All Rights Reserved.</span>
+      <span>Continuous Deployment via GitHub Actions</span>
+    </div>
+  </footer>
+
+  <script>
+    // State
+    let menuData = [];
+    let cart = [];
+
+    // Fallback menu data in case API endpoint is loaded before compilation
+    const fallbackMenu = [
+      {
+        id: 1,
+        name: "Truffle Glazed Wagyu Ribeye",
+        category: "mains",
+        price: 48.00,
+        rating: 4.9,
+        reviews: 142,
+        tag: "Chef's Signature",
+        description: "A5 Miyazaki Wagyu, black winter truffle jus, parsnip silk, charred asparagus.",
+        calories: "780 kcal",
+        image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 2,
+        name: "Smoked Rosemary Old Fashioned",
+        category: "beverages",
+        price: 18.00,
+        rating: 5.0,
+        reviews: 210,
+        tag: "Craft Cocktail",
+        description: "Small-batch Kentucky bourbon, charred rosemary smoke, Angostura bitters, flamed orange peel.",
+        calories: "190 kcal",
+        image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 3,
+        name: "Pan-Seared Chilean Sea Bass",
+        category: "mains",
+        price: 42.00,
+        rating: 4.8,
+        reviews: 98,
+        tag: "Fresh Catch",
+        description: "Sustainably caught sea bass, saffron dashi broth, baby bok choy, lotus root crisp.",
+        calories: "520 kcal",
+        image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 4,
+        name: "Velvet Espresso Martini",
+        category: "beverages",
+        price: 16.50,
+        rating: 4.9,
+        reviews: 175,
+        tag: "Signature Sip",
+        description: "Single-origin Ethiopian cold brew espresso, Ketel One vodka, coffee liqueur, Madagascar vanilla froth.",
+        calories: "210 kcal",
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 5,
+        name: "Burrata di Puglia & Heirloom Peaches",
+        category: "starters",
+        price: 22.00,
+        rating: 4.7,
+        reviews: 84,
+        tag: "Vegetarian",
+        description: "Creamy artisanal burrata, grilled Georgia peaches, 18-year balsamic drizzle, toasted pistachio dust.",
+        calories: "410 kcal",
+        image: "https://images.unsplash.com/photo-1592417817098-8f3d69102657?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 6,
+        name: "Kyoto Matcha Affogato",
+        category: "beverages",
+        price: 14.00,
+        rating: 4.9,
+        reviews: 120,
+        tag: "Artisan Drink",
+        description: "Ceremonial grade Uji matcha whisked tableside, poured over artisanal Tahitian vanilla bean gelato.",
+        calories: "280 kcal",
+        image: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 7,
+        name: "Valrhona Dark Chocolate Sphere",
+        category: "desserts",
+        price: 19.00,
+        rating: 5.0,
+        reviews: 312,
+        tag: "Must Try",
+        description: "70% Guanaja chocolate sphere melted tableside with hot salted caramel, hazelnut praline core.",
+        calories: "590 kcal",
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        id: 8,
+        name: "Yuzu Citrus Sparkling Spritz",
+        category: "beverages",
+        price: 12.00,
+        rating: 4.8,
+        reviews: 95,
+        tag: "Zero Proof / Mocktail",
+        description: "Fresh Japanese yuzu juice, sparkling mineral water, wild lavender syrup, crystallized thyme.",
+        calories: "85 kcal",
+        image: "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    // Initialize Menu
+    async function fetchMenu() {
+      try {
+        const response = await fetch('/api/menu');
+        if (!response.ok) throw new Error("API not ready");
+        menuData = await response.json();
+      } catch (err) {
+        menuData = fallbackMenu;
+      }
+      renderCards(menuData);
+    }
+
+    function renderCards(items) {
+      const container = document.getElementById('menuGrid');
+      container.innerHTML = items.map(item => `
+        <div class="menu-card" data-category="${item.category}">
+          <div class="card-img-wrapper">
+            <img src="${item.image}" alt="${item.name}" class="card-img" loading="lazy">
+            <span class="card-badge">${item.tag}</span>
+            <span class="card-cal">${item.calories}</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="card-rating">★ ${item.rating.toFixed(1)}</span>
+              <span class="card-reviews">(${item.reviews} reviews)</span>
+            </div>
+            <h3 class="card-title">${item.name}</h3>
+            <p class="card-desc">${item.description}</p>
+            <div class="card-footer">
+              <span class="card-price">$${item.price.toFixed(2)}</span>
+              <button class="add-to-cart-btn" onclick="addToCartById(${item.id})">+ Add to Order</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Filter logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        if (cat === 'all') {
+          renderCards(menuData);
+        } else {
+          renderCards(menuData.filter(i => i.category === cat));
+        }
+      });
+    });
+
+    // Cart logic
+    function addToCartById(id) {
+      const item = menuData.find(i => i.id === id);
+      if (item) addToCart(item);
+    }
+
+    function addToCart(item) {
+      const existing = cart.find(i => i.id === item.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...item, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`Added "${item.name}" to your order!`);
+    }
+
+    function updateCartUI() {
+      const countEl = document.getElementById('cartCount');
+      const totalEl = document.getElementById('cartTotalPrice');
+      const container = document.getElementById('cartItemsContainer');
+
+      const totalItems = cart.reduce((acc, i) => acc + i.qty, 0);
+      countEl.textContent = totalItems;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 3rem;">Your tray is currently empty.</p>';
+        totalEl.textContent = '$0.00';
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = cart.map(item => {
+        total += item.price * item.qty;
+        return `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+            </div>
+            <div class="cart-qty-ctrl">
+              <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+              <span>${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      totalEl.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== id);
+      }
+      updateCartUI();
+    }
+
+    // Drawer Controls
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartOverlay = document.getElementById('cartOverlay');
+
+    document.getElementById('openCartBtn').onclick = () => {
+      cartDrawer.classList.add('open');
+      cartOverlay.classList.add('open');
+    };
+
+    document.getElementById('closeCartBtn').onclick = closeCart;
+    cartOverlay.onclick = closeCart;
+
+    function closeCart() {
+      cartDrawer.classList.remove('open');
+      cartOverlay.classList.remove('open');
+    }
+
+    // Reservation Modal Controls
+    const reserveModal = document.getElementById('reserveModal');
+    const openModal = () => reserveModal.classList.add('open');
+    const closeModal = () => reserveModal.classList.remove('open');
+
+    document.getElementById('openReserveBtn').onclick = openModal;
+    document.getElementById('heroReserveBtn').onclick = openModal;
+    document.getElementById('closeReserveBtn').onclick = closeModal;
+
+    reserveModal.onclick = (e) => {
+      if (e.target === reserveModal) closeModal();
+    };
+
+    document.getElementById('reserveForm').onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('resName').value;
+      const date = document.getElementById('resDate').value;
+      closeModal();
+      showToast(`Reservation confirmed for ${name} on ${date}! 🎉`);
+      document.getElementById('reserveForm').reset();
+    };
+
+    // Checkout Simulation
+    document.getElementById('checkoutBtn').onclick = () => {
+      if (cart.length === 0) {
+        showToast("Your cart is empty! Add delicious items first.");
+        return;
+      }
+      closeCart();
+      showToast("Order placed successfully! Chef is preparing your dishes. 🍽️");
+      cart = [];
+      updateCartUI();
+    };
+
+    // Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // Run
+    fetchMenu();
+  </script>
+</body>
+</html>
